@@ -199,6 +199,7 @@ func TransitionStatus(id string, targetStatus model.OnboardingStatus, operator, 
 	isStartState := map[model.OnboardingStatus]bool{
 		model.OnboardHealthCheckIn:   true,
 		model.OnboardBgCheckIn:       true,
+		model.OnboardContractPending: true,
 		model.OnboardAccountSetupIn:  true,
 		model.OnboardTrainingIn:      true,
 		model.OnboardDefenseIn:       true,

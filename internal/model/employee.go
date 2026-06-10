@@ -43,6 +43,8 @@ type BankCard struct {
 	CardNo   string `json:"card_no"`
 }
 
+// TODO: 银行卡号需加密存储，当前为明文占位，密钥管理方案待定后接入加密解密逻辑
+
 type SpecialNeeds struct {
 	DietRestrictions string `json:"diet_restrictions"`
 	Religion         string `json:"religion"`

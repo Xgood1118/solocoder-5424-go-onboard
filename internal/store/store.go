@@ -200,8 +200,8 @@ func (s *Store) RangeApprovalInstances(fn func(id string, inst *model.ApprovalIn
 }
 
 type Handoff struct {
-	ID    string
-	Items []model.HandoffItem
+	ID    string            `json:"id"`
+	Items []model.HandoffItem `json:"items"`
 }
 
 func (s *Store) SaveHandoff(h *Handoff) {
