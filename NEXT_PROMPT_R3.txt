@@ -1,0 +1,1 @@
+两个遗留问题没修：审批流循环引用校验是空架子，ValidateFlowNoCycle 只在 node_keys[i]→node_keys[i+1] 线性相邻上做 DFS，可 NodeMap 没 NextKey 指针、根本构造不出真图循环；离职 ForceSkip 只把节点标 skipped、不推进 proc.Status，跳过 apply 后状态卡住、下步审批进不去。检查修复一下。
