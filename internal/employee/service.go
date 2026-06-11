@@ -1,13 +1,13 @@
 package employee
 
 import (
-	"encoding/base64"
 	"errors"
 	"fmt"
 	"time"
 
 	"hr-onboard/internal/model"
 	"hr-onboard/internal/store"
+	"hr-onboard/pkg/crypto"
 )
 
 var s = store.Get()
@@ -16,24 +16,20 @@ func genID(prefix string) string {
 	return fmt.Sprintf("%s_%d", prefix, time.Now().UnixNano())
 }
 
-// TODO: 当前使用 base64 占位加密，密钥管理方案待定后替换为 AES-GCM 等安全加密
 func encryptCardNo(plain string) string {
-	if plain == "" {
-		return ""
+	enc, err := crypto.Encrypt(plain)
+	if err != nil {
+		return plain
 	}
-	return base64.StdEncoding.EncodeToString([]byte(plain))
+	return enc
 }
 
-// TODO: 对应解密函数，密钥管理方案待定后替换
 func decryptCardNo(encoded string) string {
-	if encoded == "" {
-		return ""
-	}
-	dec, err := base64.StdEncoding.DecodeString(encoded)
+	dec, err := crypto.Decrypt(encoded)
 	if err != nil {
 		return encoded
 	}
-	return string(dec)
+	return dec
 }
 
 func CreateEmployee(emp *model.EmployeeProfile) (*model.EmployeeProfile, error) {

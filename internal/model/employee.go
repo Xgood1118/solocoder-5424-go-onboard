@@ -43,7 +43,8 @@ type BankCard struct {
 	CardNo   string `json:"card_no"`
 }
 
-// TODO: 银行卡号需加密存储，当前为明文占位，密钥管理方案待定后接入加密解密逻辑
+// 银行卡号使用 AES-256-GCM 加密存储，密钥通过 pkg/crypto 包管理
+// TODO: 密钥应从环境变量 HR_AES_KEY 或密钥管理服务加载，当前硬编码仅用于开发
 
 type SpecialNeeds struct {
 	DietRestrictions string `json:"diet_restrictions"`
